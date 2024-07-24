@@ -1,0 +1,58 @@
+body {
+  font-family: "Chakra Petch", sans-serif;
+}
+.app-title {
+  text-align: center;
+}
+#whole-app {
+  background: rgb(228, 222, 228);
+  max-width: 700px;
+  margin: 15px auto;
+  padding: 10px 5px 10px 5px;
+  border-radius: 50px;
+  box-shadow: 0 30px 50px rgba(25, 50, 100, 0.1);
+}
+
+#city-weather {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 55px;
+  margin-top: 25px;
+  font-size: 20px;
+}
+
+#city-search {
+  text-align: center;
+}
+#current-city {
+  display: block;
+  margin: 5px 3px 5px 70px;
+  font-size: 65px;
+}
+.current-temp {
+  text-align: center;
+  font-size: 75px;
+}
+#typesearch-city {
+  background-color: rgb(255, 255, 255);
+  border-radius: 50px;
+  font-size: 15px;
+  text-align: center;
+  padding: 3px;
+  margin: 10px;
+  font-family: "Chakra Petch", sans-serif;
+}
+
+.buttonsearch-city {
+  border-radius: 25px;
+  font-size: 15px;
+  padding: 10px;
+  margin: 10px;
+  background: rgb(247, 212, 218);
+  font-family: "Chakra Petch", sans-serif;
+}
+
+footer {
+  text-align: center;
+  margin-top: 100px;
+}

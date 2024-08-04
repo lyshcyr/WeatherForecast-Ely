@@ -56,3 +56,16 @@ footer {
   text-align: center;
   margin-top: 100px;
 }
+
+.forecast-date {
+  text-align: center;
+  margin: 5px auto;
+}
+.forecast-icon {
+  text-align: center;
+  margin: 5px auto;
+}
+.forecast-temp {
+  text-align: center;
+  margin: 5px auto;
+}

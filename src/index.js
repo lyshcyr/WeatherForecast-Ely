@@ -56,3 +56,22 @@ let searchForm = document.querySelector("#city-search");
 searchForm.addEventListener("submit", search);
 
 search("London");
+
+function displayForecast() {
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  let forecastHtml = "";
+
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `
+  <div class="forecast-day">
+    <div class="forecast-date">${day}</div>
+    <div class="forecast-icon">☀️</div>
+    <div class="forecast-temp">15 20</div>
+  </div>
+`;
+  });
+
+  forecastElement.innerHTML = forecasthtml;
+}

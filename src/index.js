@@ -13,9 +13,10 @@ function displayTemperature(response) {
   currentHumidity.innerHTML = `${response.data.temperature.humidity}%`;
   currentWind.innerHTML = `${response.data.wind.speed}km/h`;
   currentIcon.innerHTML = `<img src="${response.data.condition.icon_url}">`;
+  showForecast(response.data.city);
 }
 function search(city) {
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=70eec3d2cba7671oeet42062d679704f`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=70eec3d2cba7671oeet42062d679704f&units=metric`;
   axios.get(apiUrl).then(displayTemperature);
 }
 function searchSubmit(event) {
@@ -51,28 +52,42 @@ function formatDate(date) {
 }
 
 let currentdateElement = document.querySelector("#current-date");
-let currentDate = new Date();
+let currentDate = newDate();
 
 currentdateElement.innerHTML = formatDate(currentDate);
 
 let searchForm = document.querySelector("#city-search");
 searchForm.addEventListener("submit", search);
+function fDays(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function displayForecast() {
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  return days[date.getDay()];
+}
+
+function showForecast(city) {
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=70eec3d2cba7671oeet42062d679704f&units=metric`;
+  axios(apiUrl).then(displayForecast);
+}
+function displayForecast(response) {
   let forecastHtml = "";
 
-  days.forEach(function (day) {
-    forecastHtml =
-      forecastHtml +
-      `
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecastHtml =
+        forecastHtml +
+        `
   <div class="forecast-day">
-    <div class="forecast-date">${day}</div>
-    <div class="forecast-icon">☀️</div>
-
-    <div class="forecast-temp2><span class="forecast-temp-low">15°</span>|<span class="forecast-temp-high">20°</span> </div>
+    <div class="forecast-date">${fDays(day.time)}</div>
+    <img src="${day.condition.icon_url}" class="forecast-icon"/>
+    <div class="forecast-temp2><span class="forecast-temp-low">${Math.round(
+      day.temperature.maximum
+    )}°</span>|<span class="forecast-temp-high">${Math.round(
+          day.temperature.minimum
+        )}°</span> </div>
   </div>
 `;
+    }
   });
 
   let forecastElement = document.querySelector("#forecast");
@@ -80,4 +95,3 @@ function displayForecast() {
 }
 
 search("London");
-displayForecast();

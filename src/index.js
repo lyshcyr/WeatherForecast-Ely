@@ -14,12 +14,15 @@ function displayTemperature(response) {
   currentWind.innerHTML = `${response.data.wind.speed}km/h`;
   currentIcon.innerHTML = `<img src="${response.data.condition.icon_url}">`;
 }
-function search(event) {
-  event.preventDefault();
-  let searchInputElement = document.querySelector("#typesearch-city");
-  let city = searchInputElement.value;
+function search(city) {
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=70eec3d2cba7671oeet42062d679704f`;
   axios.get(apiUrl).then(displayTemperature);
+}
+function searchSubmit(event) {
+  event.preventDefault();
+
+  let searchInputElement = document.querySelector("#typesearch-city");
+  search(searchInputElement.value);
 }
 
 function formatDate(date) {
@@ -55,8 +58,6 @@ currentdateElement.innerHTML = formatDate(currentDate);
 let searchForm = document.querySelector("#city-search");
 searchForm.addEventListener("submit", search);
 
-search("London");
-
 function displayForecast() {
   let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   let forecastHtml = "";
@@ -68,10 +69,15 @@ function displayForecast() {
   <div class="forecast-day">
     <div class="forecast-date">${day}</div>
     <div class="forecast-icon">☀️</div>
-    <div class="forecast-temp">15 20</div>
+
+    <div class="forecast-temp2><span class="forecast-temp-low">15°</span>|<span class="forecast-temp-high">20°</span> </div>
   </div>
 `;
   });
 
-  forecastElement.innerHTML = forecasthtml;
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
 }
+
+search("London");
+displayForecast();

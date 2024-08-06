@@ -69,3 +69,11 @@ footer {
   text-align: center;
   margin: 5px auto;
 }
+
+#forecast {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px auto;
+  margin-left: 50px;
+  margin-right: 50px;
+}

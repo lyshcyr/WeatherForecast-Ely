@@ -6,13 +6,17 @@ function displayTemperature(response) {
   let currentHumidity = document.querySelector("#current-humidity");
   let currentWind = document.querySelector("#current-wind");
   let currentIcon = document.querySelector("#temp-icon");
+  let timeElement = document.querySelector("#current-date");
+  let date = new Date(response.data.time * 1000);
 
+  timeElement.innerHTML = formatDate(date);
   cityElement.innerHTML = response.data.city;
   currentTemperature.innerHTML = temperature;
   currentDescription.innerHTML = response.data.condition.description;
   currentHumidity.innerHTML = `${response.data.temperature.humidity}%`;
   currentWind.innerHTML = `${response.data.wind.speed}km/h`;
   currentIcon.innerHTML = `<img src="${response.data.condition.icon_url}">`;
+
   showForecast(response.data.city);
 }
 
@@ -51,11 +55,6 @@ function searchSubmit(event) {
   search(searchInputElement.value);
 }
 
-//let currentdateElement = document.querySelector("#current-date");
-//let currentDate = newDate();
-
-//currentdateElement.innerHTML = formatDate(currentDate);
-
 function fDays(timestamp) {
   let date = new Date(timestamp * 1000);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -92,6 +91,6 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHtml;
 }
 let searchForm = document.querySelector("#city-search");
-searchForm.addEventListener("submit", search);
+searchForm.addEventListener("submit", searchSubmit);
 
 search("London");

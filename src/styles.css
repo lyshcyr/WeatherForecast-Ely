@@ -62,7 +62,7 @@ footer {
   margin: 5px auto;
 }
 .forecast-icon {
-  text-align: center;
+  display: block;
   margin: 5px auto;
 }
 .forecast-temp {
